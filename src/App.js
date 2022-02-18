@@ -1,5 +1,4 @@
-import List from "./components/List";
-import Search from "./components/Search";
+import { useState } from "react";
 
 const stories = [
   {
@@ -20,26 +19,47 @@ const stories = [
   },
 ];
 
-function App() {
-  function Example() {
-    return (
-      <input
-        onFocus={(e) => {
-          console.log("Focused on input");
-        }}
-        placeholder="onFocus is triggered when you click this input."
-      />
-    );
-  }
+const App = () => {
   return (
     <div>
       <h1>My Hacker Stories</h1>
       <Search />
       <hr />
       <List list={stories} />
-      <Example />
     </div>
   );
-}
+};
+
+const Search = () => {
+  const handleChange = (event) => {
+    console.log(event.target.value);
+  };
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" onChange={handleChange} />
+    </div>
+  );
+};
+
+const List = (props) => {
+  return (
+    <ul>
+      {props.list.map((item) => (
+        <Item key={item.objectID} item={item} />
+      ))}
+    </ul>
+  );
+};
+const Item = (props) => (
+  <li>
+    <span>
+      <a href={props.item.url}>{props.item.title}</a>
+    </span>
+    <span>{props.item.author}</span>
+    <span>{props.item.num_comments}</span>
+    <span>{props.item.points}</span>
+  </li>
+);
 
 export default App;
