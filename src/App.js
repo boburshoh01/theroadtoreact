@@ -31,13 +31,16 @@ const App = () => {
 };
 
 const Search = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleChange = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
   return (
     <div>
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" onChange={handleChange} />
+      <p>Search for {searchTerm}</p>
     </div>
   );
 };
@@ -51,6 +54,7 @@ const List = (props) => {
     </ul>
   );
 };
+
 const Item = (props) => (
   <li>
     <span>
